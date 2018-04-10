@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# Name: Kajsa Rosenblad
+# Student number: 11361840
+"""
+This script scrapes IMDB and outputs a CSV file with highest rated tv series.
+"""
 import csv
 from requests import get
 from requests.exceptions import RequestException
@@ -12,46 +18,70 @@ OUTPUT_CSV = 'tvseries.csv'
 
 def extract_tvseries(dom):
     """
-    Extract a list of highest rated TV series from DOM (of IMDB page).
-    Each TV series entry should contain the following fields:
-    - TV Title
-    - Rating
-    - Genres (comma separated if more than one)
-    - Actors/actresses (comma separated if more than one)
-    - Runtime (only a number!)
+    Uses Beautiful Soup library to scrape information from IMDB, appending it 
+    to separate lists, then lastly joining lists and returning the information.
     """
-
-    # ADD YOUR CODE HERE TO EXTRACT THE ABOVE INFORMATION ABOUT THE
-    # HIGHEST RATED TV-SERIES
-    # NOTE: FOR THIS EXERCISE YOU ARE ALLOWED (BUT NOT REQUIRED) TO IGNORE
-    # UNICODE CHARACTERS AND SIMPLY LEAVE THEM OUT OF THE OUTPUT.
-
-    # Create list for all information for movies
-
     
-    
+    # Create list for all movie titles
+    title_list =[]
     for title in dom('h3', 'lister-item-header'):
         text = title.contents[3]
 
         name = text.string
+        title_list.append(name) 
 
+    # Create list for all ratings
+    rate_list = []
     for rate in dom('span', 'value'):
         rating = rate.text
-        
-    for genre in dom('span', 'genre'):
-        genres = genre.string
-
-    for actor in dom(href = re.compile("adv_li_st")):
-        actors = actor.string
-
+        rate_list.append(rating)
     
+    # Create list for all genres, strip \n and blank spaces
+    genre_list = []    
+    for genre in dom('span', 'genre'):
+        genres = genre.string.strip('\n')
+        genres = genres.strip()
+        genre_list.append(genres)
+    
+    # Access info per movie, create two lists to append actors in chunks
+    movie_actor = []
+    all_actors = []
+    
+    for chunk in dom('div', 'lister-item-content'):
+
+        for actor in chunk(href = re.compile('adv_li_st')):
+            
+            movie_actor.append(actor.string)
+        
+        # Make list item string, to make the CSV file look cohesive
+        string = '{}, {}, {}, {}'.format(movie_actor[0], movie_actor[1],
+            movie_actor[2], movie_actor[3])
+
+        all_actors.append(string)
+        
+        movie_actor = []
+     
+    # Create list for runtime
+    runtime_list = []
     for runtime in dom('span', 'runtime'):
         run = runtime.text.strip('min')
-    
+        runtime_list.append(run)
 
- 
+    # Collect all data per series, using two lists
+    tvseries = []
+    series = []
+    for i in range(50):
+        series.append(title_list[i])
+        series.append(rate_list[i])
+        series.append(genre_list[i])
+        series.append(all_actors[i])
+        series.append(runtime_list[i])
+        
+        # Append all information per serie, empty initial list
+        tvseries.append(series)
+        series = []
 
-    return []   # REPLACE THIS LINE AS WELL AS APPROPRIATE
+    return tvseries
 
 
 def save_csv(outfile, tvseries):
@@ -61,7 +91,9 @@ def save_csv(outfile, tvseries):
     writer = csv.writer(outfile)
     writer.writerow(['Title', 'Rating', 'Genre', 'Actors', 'Runtime'])
 
-    # ADD SOME CODE OF YOURSELF HERE TO WRITE THE TV-SERIES TO DISK
+    for i in range (50):
+        writer.writerow(tvseries[i])
+    
 
 
 def simple_get(url):
