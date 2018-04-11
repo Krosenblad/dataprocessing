@@ -22,28 +22,27 @@ def extract_tvseries(dom):
     to separate lists, then lastly joining lists and returning the information.
     """
     
-    # Create list for all movie titles
+    # Create list for all movie titles, check for missing values
     title_list =[]
     for title in dom('h3', 'lister-item-header'):
         text = title.contents[3]
-
-        name = text.string
+        name = empty(text.string)
         title_list.append(name) 
 
-    # Create list for all ratings
+    # Create list for all ratings, check for missing values
     rate_list = []
     for rate in dom('span', 'value'):
-        rating = rate.text
+        rating = empty(rate.text)
         rate_list.append(rating)
     
-    # Create list for all genres, strip \n and blank spaces
+    # Create list for all genres, strip \n and blank spaces, check for missings
     genre_list = []    
     for genre in dom('span', 'genre'):
         genres = genre.string.strip('\n')
-        genres = genres.strip()
+        genres = empty(genres.strip())
         genre_list.append(genres)
     
-    # Access info per movie, create two lists to append actors in chunks
+    # Access info per movie (chunk), create two lists to append actors in chunks
     movie_actor = []
     all_actors = []
     
@@ -53,23 +52,33 @@ def extract_tvseries(dom):
             
             movie_actor.append(actor.string)
         
-        # Make list item string, to make the CSV file look cohesive
-        string = '{}, {}, {}, {}'.format(movie_actor[0], movie_actor[1],
-            movie_actor[2], movie_actor[3])
+        # Create empty string to store lists of actors in
+        string = ''
+        for i in range (len(movie_actor)):
+            
+            # Use length of list to access individual actors
+            string += str(movie_actor[i])
 
+            if i != len(movie_actor) - 1:
+                string += ', ' 
+           
+        # Check for missing values
+        string = empty(string)
         all_actors.append(string)
         
         movie_actor = []
      
-    # Create list for runtime
+    # Create list for runtime, check for missing values
     runtime_list = []
     for runtime in dom('span', 'runtime'):
-        run = runtime.text.strip('min')
+        run = empty(runtime.text.strip('min'))
         runtime_list.append(run)
 
     # Collect all data per series, using two lists
     tvseries = []
     series = []
+    
+    # Append information per series, create a list
     for i in range(50):
         series.append(title_list[i])
         series.append(rate_list[i])
@@ -77,12 +86,19 @@ def extract_tvseries(dom):
         series.append(all_actors[i])
         series.append(runtime_list[i])
         
-        # Append all information per serie, empty initial list
+        # Append all information from list to master-list, empty initial list
         tvseries.append(series)
         series = []
 
     return tvseries
 
+# Function to check for missing values
+def empty(item):
+    if not item:
+        string = 'No information'
+        return string
+    else:
+        return item 
 
 def save_csv(outfile, tvseries):
     """
