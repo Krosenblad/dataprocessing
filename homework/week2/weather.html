@@ -1,0 +1,177 @@
+<html>
+<header>
+	<h2> Average Temperature De Bilt Weather Station </h2>
+	<p> Homework week 2, Kajsa Rosenblad </p>
+	<a href="http://projects.knmi.nl/klimatologie/daggegevens/selectie.cgi"> Data source </a>
+</header>
+<canvas id="graph" width="600" height="600">
+	Here I will draw a graph
+</canvas>
+
+<script>
+
+// Initiate XML listener
+function reqListener () {
+
+  // Loads data from GitHub
+  let rawdata = this.responseText
+
+  // Splits data per line, creates empty lists for storage
+  rawdata = rawdata.split("\n")
+  date = []
+  temp = []
+
+  // Splits data after ',', creates string to store datum
+  for (let i = 0; i < rawdata.length - 1; i++){
+  	item = rawdata[i].split(",")
+  	dates = item[1]
+  	datum = ""
+  	
+  	// Create appropriate format for datum, to be able to use new Date function
+  	for (let n = 0; n < dates.length; n++){
+
+  		datum += (dates[n])
+
+  		if (n == 3 || n == 5 )
+  			datum += "-"
+  	}
+  	// Fill lists with dates and temperatures
+  	date.push(new Date(datum))
+  	temp.push(Number(item[2]))
+  }
+
+  	// Transform dates into milliseconds, calculate which day of the year it corresponds to
+    for (let sec = 0; sec < date.length; sec++){
+    	date[sec] = date[sec].getTime()
+    	date[sec] = (date[sec] / 86400000) - 9495
+    	
+    }
+
+  	// Function for the appropriate allocation of temperature/Date points
+  	function createTransform(domain, range){
+
+    let domain_min = domain[0]
+    let domain_max = domain[1]
+    let range_min = range[0]
+    let range_max = range[1]
+
+    // formulas to calculate the alpha and the beta
+   	let alpha = (range_max - range_min) / (domain_max - domain_min)
+    let beta = range_max - alpha * domain_max
+
+    // returns the function for the linear transformation (y= a * x + b)
+    return function(x){
+      return alpha * x + beta;
+    }}
+
+    // Sets max and min of days and temperature
+    let domainDate = [Math.min.apply(null, date), Math.max.apply(null, date)]
+    let domainTemp = [Math.min.apply(null, temp), Math.max.apply(null, temp)]
+    
+    // Sets boundries to draw temperature line, combining min/max with canvas coordinates
+    let transformTemp = createTransform(domainTemp, [480, 35])
+    let transformDate = createTransform(domainDate, [35, 480])
+    
+    // Initiate canvas
+    let canvas = document.getElementById('graph'); 
+	let ctx = canvas.getContext('2d');
+
+	// Draw graph space, x and y axis
+	ctx.beginPath();
+	ctx.moveTo(30,10);
+	ctx.lineTo(30,490);
+	ctx.lineTo(480,490)
+	ctx.stroke()
+
+	// Draws temperature line, initiates to first temperature dot
+	ctx.beginPath();
+	ctx.moveTo(35.00000000000001, 376.25);
+	
+	// Creates empty lists for coordinates, loops over data points, setting line appropriately
+	let tempCord = []
+	let dateCord = []
+	for (let i = 0; i < date.length; i++){
+		
+		tempCord[i] = transformTemp(temp[i])
+		dateCord[i] = transformDate(date[i])
+		ctx.lineTo(dateCord[i], tempCord[i])
+	}
+	ctx.stroke()
+	
+	// Create coordinates for lines to denotate months, start at 35 (since graph starts there)
+	let months = []
+	let month = 35
+	
+	for (let i = 0; i < 12; i++){
+		months[i] = month
+		
+		// Calculate how big the steps have to be by using the length of the graph divided by 12
+		month = month + ((480-35)/12)
+	}
+
+	// Create list of months to use in loop
+	let monthName =["January", "February", "Mars", "April", "May", "June", "July", "August", 
+	"September", "October", "November", "December"]
+	
+	// Loop over canvas, planting lines and names using the coordinates
+	for (let i = 0; i < 12; i ++){	
+		ctx.beginPath();
+		ctx.moveTo(months[i], 490);
+		ctx.lineTo(months[i], 500);
+		ctx.stroke()
+
+		ctx.save();
+		ctx.translate(months[i], 550);
+		ctx.rotate(-Math.PI/2);
+		ctx.textAlign = "right";
+		ctx.fillText(monthName[i], 40, 0);
+		ctx.restore();
+	}
+
+	// Create coordinates for 8 lines to denotate temperature, starting at 480
+	let tempLine = []
+	let line = 480
+
+	for (let i = 0; i < 8 ; i++){
+		tempLine[i] = line;
+		line = line - (480/8);
+	}
+	
+	// Create list of temperatures
+	let temps = [-100, -50, 0, 50, 100, 150, 200, 250]
+	
+	// Draw lines using coordinates, putting approriate temperature next to it
+	for (let i = 0; i < 8; i++){
+		ctx.beginPath();
+		ctx.moveTo(30, tempLine[i]);
+		ctx.lineTo(20, tempLine[i]);
+		ctx.stroke()
+		ctx.font = "10px Arial"
+		ctx.fillText (temps[i], 0, tempLine[i])
+	}
+	
+	// Draw the year (1996) next to graph, rotating the board diagonally
+	ctx.save();
+	ctx.translate(0, 530);
+	ctx.rotate(-Math.PI / 4);
+	ctx.textAlign = 'right';
+	ctx.fillText('1996', 40, 0);
+
+	ctx.restore();
+
+	}
+
+// Url to retrieve data set from GitHub
+var url = "https://raw.githubusercontent.com/Krosenblad/dataprocessing/master/homework/weather/KNMI_19961231.txt";
+
+var oReq = new XMLHttpRequest();
+oReq.addEventListener('load', reqListener);
+oReq.open("get", url, true);
+oReq.send();
+
+</script>
+
+
+
+
+
