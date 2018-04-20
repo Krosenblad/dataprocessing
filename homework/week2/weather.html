@@ -138,7 +138,7 @@ function reqListener () {
 	}
 	
 	// Create list of temperatures
-	let temps = [-100, -50, 0, 50, 100, 150, 200, 250]
+	let temps = [-10, -5, 0, 5, 10, 15, 20, 25]
 	
 	// Draw lines using coordinates, putting approriate temperature next to it
 	for (let i = 0; i < 8; i++){
@@ -158,6 +158,30 @@ function reqListener () {
 	ctx.fillText('1996', 40, 0);
 
 	ctx.restore();
+
+	// Function to calculate median temperature, found: https://gist.github.com/caseyjustus/1166258
+	function median(values) {
+
+    values.sort( function(a,b) {return a - b;} );
+
+    var half = Math.floor(values.length/2);
+
+    if(values.length % 2)
+        return values[half];
+    else
+        return (values[half-1] + values[half]) / 2.0;
+	}
+
+
+	// Calculate median temperature of year 1996, set dashed line
+	let medTemp = transformTemp(median(temp))
+	
+	ctx.beginPath();
+	ctx.setLineDash([5, 15])
+	ctx.moveTo(30, medTemp);
+	ctx.lineTo(490, medTemp)
+	ctx.stroke()
+	ctx.fillText("Median Temperature 1996", 35, (medTemp - 10));
 
 	}
 
