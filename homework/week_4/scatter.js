@@ -7,7 +7,7 @@ and a special thanks to the assistants who helped me tackle this mountain of dat
 window.onload = function(){
 
 // Data covering wellbeing in the scandinavian countries
-var scandinavia = "http://stats.oecd.org/SDMX-JSON/data/RWB/DK01+DK02+DK03+DK04+DK05+FI19+FI1B+FI1C+FI1D+FI20+NO01+NO02+NO03+NO04+NO05+NO06+NO07+SE11+SE12+SE21+SE22+SE23+SE31+SE32+SE33.UNEM_RA+LIFE_EXP.VALUE/all?startTime=2000&endTime=2014"
+var scandinavia = "https://stats.oecd.org/SDMX-JSON/data/RWB/DK01+DK02+DK03+DK04+DK05+FI19+FI1B+FI1C+FI1D+FI20+NO01+NO02+NO03+NO04+NO05+NO06+NO07+SE11+SE12+SE21+SE22+SE23+SE31+SE32+SE33.UNEM_RA+LIFE_EXP.VALUE/all?startTime=2000&endTime=2014"
 
 function callback(data){
 
