@@ -1,0 +1,27 @@
+/*Kajsa Rosenblad */
+.text{
+	font-family: TimesNewRoman; 
+	font-size: 12;
+	color:#756bb1;
+	font-style: bold;
+}
+.axis{
+	fill: none;
+  	stroke: #000;
+  	shape-rendering: crispEdges;
+  	font-family: TimesNewRoman;
+}
+.norway{
+	fill: #74a9cf;
+}
+
+.sweden{
+	fill: #0570b0;
+}
+
+.finland{
+	fill: #fdbb84;
+}
+.denmark{
+	fill: #ef6548;
+}
