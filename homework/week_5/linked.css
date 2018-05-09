@@ -10,6 +10,11 @@
 	
 }
 
+.axis{
+	fill: none;
+  	stroke: #000;
+  	shape-rendering: crispEdges;
+  	font-family: TimesNewRoman;
 }
 .text{
 	font-family: TimesNewRoman; 
@@ -17,6 +22,26 @@
 	color:#756bb1;
 	font-style: bold;
 }
+
+#pad{
+	width: 1200px;
+	height:50px;
+}
+.norway{
+	fill: #74a9cf;
+}
+
+.sweden{
+	fill: #0570b0;
+}
+
+.finland{
+	fill: #fdbb84;
+}
+.denmark{
+	fill: #ef6548;
+}
+
 
 
 

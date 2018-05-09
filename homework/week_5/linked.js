@@ -14,7 +14,7 @@ window.onload = function() {
 		  if (error) throw error;
 
 			var happy = response[1]
-			console.log(happy['0']["Average Wellbeing(0-10)"])
+			
 			
 			names = ["SWE", "DNK", "FIN", "NOR"]
 			
@@ -71,9 +71,12 @@ window.onload = function() {
 			document.getElementById('container').innerHTML = "";
 			HPI(values, rank)
 		}
-
+		final = JSON.parse(response[0].responseText)
+		callback(final)
 		// End of queue
 		};
+
+		
 	
 // End of file	
 }; 
