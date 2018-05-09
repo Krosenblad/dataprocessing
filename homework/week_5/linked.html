@@ -1,0 +1,50 @@
+<!--Kajsa Rosenblad, Data Processing, 11361840 -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Happiness </title>
+	<link rel="stylesheet" type="text/css" href="linked.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="https://d3js.org/d3-collection.v1.min.js"></script>
+	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+	<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+	<script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+	<script src="https://d3js.org/d3-request.v1.min.js"></script>
+	<script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+	<script src="//d3js.org/topojson.v1.min.js"></script>
+	<script src="datamaps.world.min.js"></script>
+
+	<script src="linked.js"></script>
+	<script src="dropdown.js"></script>
+	<a class = "text" target="_blank" href = "http://happyplanetindex.org/countries"> Data source </a>
+	<p class = "text" > Kajsa Rosenblad </p>
+	<p class = "text" > 11361840 </p>
+	
+</head>
+<body>
+	<h1 align = "center"> Wellbeing in Scandinavia</h1>
+	<p align = "center"> Scandinavia is located in the far north of Europe, some parts even reacging beyond the artic circle. Yet, these countries are in no way unhappy and hostile. Chose a dataset to see how well the countries in scandinavia are doing. </p>
+	
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Datasets
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button" id = "hpi">Happy Planet Index</button>
+    <button class="dropdown-item" type="button" id ="wellbeing">Average Wellbeing(0-10)</button>
+    
+  </div>
+</div>
+
+	<div align = "center" id = "container" align>		
+	</div>
+</div>
+	
+	<div id="graphy" style ="height:500px; width:1100px;"" ></div>
+
+
+</body>
