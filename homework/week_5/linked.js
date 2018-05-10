@@ -44,6 +44,7 @@ window.onload = function() {
 			// Parse data from response
 			var scand = JSON.parse(response[0].responseText)
 
+		// Initiate start map
 		var map = new Datamap({
 		
 		element: document.getElementById('container'),
@@ -57,20 +58,41 @@ window.onload = function() {
 		return {path: path, projection: projection};
 		},
 		
-		fills: { defaultFill: '#F5F5F5' }
+		fills: { defaultFill: '#F5F5F5' },
+
+		/* Try to get interaction going, only thing I've managaed so far is to remove regions 
+		from the scatterplot (not my intention), I want to be able to resize and re-colour them*/
+ 		done: function(datamap) {
+        datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+            country = geography.properties.name
+
+            bigger = document.getElementsByClassName(country)
+            console.log(bigger)
+
+
+            for (let i = 0; i < bigger.length; i ++){
+            	console.log(bigger[i])
+            	bigger[i].remove();
+
+            }
+        });
+    }
 	});
 
 
+		// Function for initiating wellbeing map
 		wellbeing.onclick = function(d){
 			document.getElementById('container').innerHTML = "";
 			update(values_well, rank_wellbeing)
 		}
 
+		// Function for initiating hpi map
 		hpi.onclick = function(e){
 			console.log("hoi")
 			document.getElementById('container').innerHTML = "";
 			HPI(values, rank)
 		}
+		// Callback for creation of scatterplot
 		final = JSON.parse(response[0].responseText)
 		callback(final)
 		// End of queue

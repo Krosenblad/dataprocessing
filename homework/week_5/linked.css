@@ -16,29 +16,23 @@
   	shape-rendering: crispEdges;
   	font-family: TimesNewRoman;
 }
-.text{
-	font-family: TimesNewRoman; 
-	font-size: 12;
-	color:#756bb1;
-	font-style: bold;
-}
 
 #pad{
 	width: 1200px;
 	height:50px;
 }
-.norway{
+.Norway{
 	fill: #74a9cf;
 }
 
-.sweden{
+.Sweden{
 	fill: #0570b0;
 }
 
-.finland{
+.Finland{
 	fill: #fdbb84;
 }
-.denmark{
+.Denmark{
 	fill: #ef6548;
 }
 

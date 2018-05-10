@@ -1,3 +1,8 @@
+function big(circle){
+	console.log(circle)
+}
+
+
 function callback(data){
 	
 	console.log(data)
@@ -59,27 +64,27 @@ function callback(data){
 
 		for (var k = 0; k < coordinates00.length; k++){
 			if (norway[i] == k) {
-				coordinates00[k].push("norway")
+				coordinates00[k].push("Norway")
 				no00.push(coordinates00[k])
-				coordinates14[k].push("norway")
+				coordinates14[k].push("Norway")
 				no14.push(coordinates14[k])
 			}
 			if (sweden[i] == k){
-				coordinates00[k].push("sweden")
+				coordinates00[k].push("Sweden")
 				se00.push(coordinates00[k])
-				coordinates14[k].push("sweden")
+				coordinates14[k].push("Sweden")
 				se14.push(coordinates14[k])
 			}
 			if (denmark[i] == k){
-				coordinates00[k].push("denmark")
+				coordinates00[k].push("Denmark")
 				de00.push(coordinates00[k])
-				coordinates14[k].push("denmark")
+				coordinates14[k].push("Denmark")
 				de14.push(coordinates14[k])
 			}
 			if (finland[i]== k) {
-				coordinates00[k].push("finland")
+				coordinates00[k].push("Finland")
 				fi00.push(coordinates00[k])
-				coordinates14[k].push("finland")
+				coordinates14[k].push("Finland")
 				fi14.push(coordinates14[k])
 			}
 		}
@@ -274,8 +279,7 @@ function callback(data){
 	}
 	document.getElementById("restore").onclick = restoreData;
 
-// d3.request(data)
-// 	.get(function(xhr) {callback(JSON.parse(xhr.responseText))});
+
 }
 		
 
