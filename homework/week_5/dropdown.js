@@ -5,7 +5,6 @@
 */
 
 function HPI (values, index){
-		console.log(index)
 		var dataset = {};
 		
 		// Get min and max values for colours showing how well the countries are doing

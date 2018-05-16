@@ -49,7 +49,7 @@ window.onload = function(){
 			valuesWell.push(Number(happy[i]["Average Wellbeing(0-10)"]))
 			rankWellbeing.push(pushWell)
 		}
-	
+
 	// Parse data from response
 	var scand = JSON.parse(response[0].responseText)
 
@@ -59,7 +59,7 @@ window.onload = function(){
 	// Function for initiating wellbeing map
 	wellbeing.onclick = function(d){
 		document.getElementById('container').innerHTML = "";
-		update(values_well, rank_wellbeing)
+		update(valuesWell, rankWellbeing)
 		document.getElementById("name").innerHTML = "Average Wellbeing (0-10)";
 	}
 
