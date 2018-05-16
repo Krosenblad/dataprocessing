@@ -18,22 +18,20 @@ window.onload = function(){
 		  
 	// Initiate queue function, processes json file
 	function queued(error, response){
-	  if (error) throw error;
+	  if(error) throw error;
 		
 		var happy = response[1]
 		var names = ["SWE", "DNK", "FIN", "NOR"]
 		
-		// Lists for HPI rank + values
+		// Lists for HPI rank + values, as well as wellbeing
 		var rank = []
 		var values = []
 		
-		// Lists for Average well being + values
 		var rankWellbeing = []
 		var valuesWell=[]
 		
-		for (var i = 0; i < happy.length; i ++){
-			
-			// Create two temporary lists
+		for(var i = 0; i < happy.length; i ++){
+
 			var push = []
 			var pushWell=[]
 			
