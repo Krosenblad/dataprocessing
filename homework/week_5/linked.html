@@ -1,13 +1,20 @@
-<!--Kajsa Rosenblad, Data Processing, 11361840 -->
+<!--Kajsa Rosenblad
+	11361840
+	This HTML is the foundation for my two visualisations. I am loading several d3 libraries, my own javascript files, as well as a bootstrap scheme in the head, then drawing divs that can later be filled with content.
+-->
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Happiness </title>
+	<title>Happiness in Scandinavia</title>
+
+	<!--Bootstrap and stylesheets -->
 	<link rel="stylesheet" type="text/css" href="linked.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<!--D3 libraries -->
 	<script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
 	<script src="https://d3js.org/d3-collection.v1.min.js"></script>
 	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
@@ -18,45 +25,63 @@
 	<script src="//d3js.org/topojson.v1.min.js"></script>
 	<script src="datamaps.world.min.js"></script>
 
+	<!--Own Javascripts -->
 	<script src="linked.js"></script>
 	<script src="dropdown.js"></script>
 	<script src="scatterplot.js"></script>
-	<a class = "text" target="_blank" href = "http://happyplanetindex.org/countries"> Data source </a>
-	<p class = "text" > Kajsa Rosenblad </p>
-	<p class = "text" > 11361840 </p>
 	
+	<!-- Navbar linking to background story -->
+	<nav class="navbar navbar-dark bg-dark">
+	 	<ul class="nav justify-content-end">
+		  <li class="nav-item">
+		  	<a class="nav-link active" href="linked.html">Home</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link active" href="background.html">Background Story</a>
+		  </li>
+		</ul>
+	</nav>
+	<h1 align = "center">Wellbeing in Scandinavia</h1>
 </head>
-<body>
-	<h1 align = "center"> Wellbeing in Scandinavia</h1>
-	<p align = "center"> Scandinavia is located in the far north of Europe, some parts even reacging beyond the artic circle. Yet, these countries are in no way unhappy and hostile. Chose a dataset to see how well the countries in scandinavia are doing. </p>
-	
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Datasets
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button" id = "hpi">Happy Planet Index</button>
-    <button class="dropdown-item" type="button" id ="wellbeing">Average Wellbeing(0-10)</button>
-    
-  </div>
-</div>
 
-	<div align = "center" id = "container">	</div>
-	<div id = "pad"></div>
-	<div class="dropdown">
-	  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    Years
-	  </button>
-	  	<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-	    <button class="dropdown-item" type="button" id = "restore">2000</button>
-	    <button class="dropdown-item" type="button" id ="updateButton">2014</button>
-    
-  		</div>
+<body>	
+	<!--Introducing the possibilities of the data -->
+	<div class ="intro">
+		<p class ="intro">
+			Scandinavia is located in the far north of Europe, some parts even reaching beyond the artic circle. Yet, these countries are in no way unhappy and hostile. On your left, you can chose a dataset to see how well the countries in scandinavia are doing, based on the Happy Planet Index. On your right, you can compare the unemployement and life-expectancy, from the year 2000 and the year 2014 based on OECD statistics.
+		</p>
 	</div>
+
+	<!--Drop down button using bootstrap, for Happy Planet datasets -->
+	<div class="dropdown">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Datasets</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+		    <button class="dropdown-item" type="button" id = "hpi">Happy Planet Index</button>
+		    <button class="dropdown-item" type="button" id ="wellbeing">Average Wellbeing(0-10)</button> 
+		</div>	
+	</div>
+	<!--Drop down button using bootstrap, for datasets per year -->
+	<div class="dropdown" align="right"> 
+		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Years</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+		    <button class="dropdown-item" type="button" id = "restore">2000</button>
+		    <button class="dropdown-item" type="button" id ="updateButton">2014</button>
+	  	</div>	
+	</div>
+
+	<!--Initiate div "container" for map -->
+	<div id ="container"></div>
 	
-	<div align = "center" id = "scatter"></div>
+	<!--Initiate div "scatter" for scatterplot -->
+	<div id ="scatter"></div>
 	
-
-
-
+	<!--Div for sources and name of dataset currently in use -->
+	<div id="sources" align="center">
+		<p id ="name">Happy Planet Index, rank out of 140 countries</p>
+		<p>Kajsa Rosenblad</p>
+		<p>11361840</p>
+		<a target="_blank" href="http://happyplanetindex.org/countries">Happy Planet Index</a>
+		<br>
+		<a target="_blank" href="https://stats.oecd.org/index.aspx?r=146288#">OECD statistics</a>
+	</div>
 </body>

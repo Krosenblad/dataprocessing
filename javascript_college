@@ -1,0 +1,19 @@
+Link javascript to html: 
+<script src = "scripts/objects.js"> </script>
+
+Asynchronous:
+Javascript executes functions asynchronous, if it has to wait for one function it skips to the next and executes that before. This means all functions will not be executed in the order you intended them to be executed
+
+AJAX = asynchronous javascript and XML
+JSON = Javascript object notation, most common way to load content from web
+
+{"employees":[
+	"name": "kajsa", "job":"coder"
+]}
+Called key:value pairs: one is a key, the other the value of the key
+
+var= x, exists outside of function
+let = x, more temporary
+
+
+

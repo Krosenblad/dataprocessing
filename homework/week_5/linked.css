@@ -1,39 +1,56 @@
+/*	Kajsa Rosenblad
+	11361840
+	This CSS file gives the two main divs (container and scatter) their directions, as well as provides some
+	style to the text elements. The circles also get their colours (based on the country) via this style sheet.
+*/
+
 #container{
-	width: 800px;
-	height: 500px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 20px;
-	padding: 20px;
-	background-color: white;
-	align-content: center;
-	
+	width:50%;
+	height:480px;
+	float:left;
+	align-content:center;	
+}
+
+#scatter{
+	width:50%;
+	float:right;
+}
+.info{
+	width:800px;
+	margin-left:300px;
+	text-align:center;
+	border:2px;
+	border-style:solid;
+	border-color:default
+}
+
+.intro{
+	width:500px;
+	float:center;
+	text-align:center;
+	align-content:center;
+	margin-left: 230px;
 }
 
 .axis{
-	fill: none;
-  	stroke: #000;
-  	shape-rendering: crispEdges;
-  	font-family: TimesNewRoman;
+	fill:none;
+  	stroke:#000;
+  	shape-rendering:crispEdges;
 }
 
-#pad{
-	width: 1200px;
-	height:50px;
-}
 .Norway{
-	fill: #74a9cf;
+	fill:#74a9cf;
 }
 
 .Sweden{
-	fill: #0570b0;
+	fill:#0570b0;
 }
 
 .Finland{
-	fill: #fdbb84;
+	fill:#fdbb84;
 }
 .Denmark{
-	fill: #ef6548;
+	fill:#ef6548;
 }
 
 
